@@ -6,14 +6,13 @@ const getAll = async () => {
 }  // Essa função vai retornar todas as tasks que tem no banco de dados
 
 const createTask = async (task) => {
-    const { title } = task
-
+    const {title} = task
     const dateUTC = new Date(Date.now()).toUTCString()
-    console.log(dateUTC)
 
-    const query = 'INSERT INTO tasks(title, status, created_at) VALUES(?, ?, ?)'
+    const query = 'INSERT INTO tasks(title, status, create_at) VALUES(?, ?, ?)'
 
-    const createdTask = await connection.execute(query, [title,'Pendente', ''])
+    const [createdTask] = await connection.execute(query, [title,'Agora!!!', dateUTC])
+    return {insertId: createdTask.insertId}
 }
 
 module.exports = {
