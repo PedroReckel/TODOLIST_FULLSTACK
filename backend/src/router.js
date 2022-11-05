@@ -7,8 +7,14 @@ const tasksMiddleware = require('./middlewares/tasksMiddleware')
 const router = express.Router()
 
 router.get('/tasks', tasksController.getAll)
-router.post('/tasks', tasksMiddleware.validateFildTitle, tasksController.createTask)
+
+router.post('/tasks', 
+    tasksMiddleware.validateFildTitle, 
+    tasksMiddleware.validateFieldStatus,
+    tasksController.createTask)
+
 router.delete('/tasks/:id', tasksController.deleteTask)
+
 router.put('/tasks/:id', 
     tasksMiddleware.validateFildTitle,
     tasksMiddleware.validateFieldStatus,

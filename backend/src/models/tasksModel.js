@@ -6,12 +6,12 @@ const getAll = async () => {
 }  // Essa função vai retornar todas as tasks que tem no banco de dados
 
 const createTask = async (task) => {
-    const {title} = task
+    const {title, status} = task
     const dateUTC = new Date(Date.now()).toUTCString()
 
     const query = 'INSERT INTO tasks(title, status, create_at) VALUES(?, ?, ?)'
 
-    const [createdTask] = await connection.execute(query, [title,'Pendente', dateUTC])
+    const [createdTask] = await connection.execute(query, [title, status, dateUTC])
     return {insertId: createdTask.insertId}
 }
 
